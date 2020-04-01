@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './style.css';
-import {countDone, countToDo} from "../../../../pages/home/Home";
+import {countDone, countToDo} from "../../../../pages/home/CountTasks";
 export default class SideBar extends React.Component {
     render() {
         const { className } = this.props;

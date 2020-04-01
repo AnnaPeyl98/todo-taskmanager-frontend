@@ -1,8 +1,8 @@
 .main {
     flex-grow: 1;
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    box-sizing: border-box;
     width: 100%;
     max-width: 1366px;
     padding: 0 10px;
@@ -17,9 +17,10 @@
 }
 
 .main__content {
+    max-width: 1060px;
+    width: 100%;
     flex-grow: 1;
     box-sizing: border-box;
     background-color: #fff;
 
-    margin-top: 70px;
 }

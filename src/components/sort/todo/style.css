@@ -1,0 +1,56 @@
+.sorted-button{
+    display: inline-block;
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    outline:none;
+    float: right;
+    margin-top:23px;
+}
+.sorted-button__text_less, .sorted-button__text_more, .sorted-button__text_disable{
+    display: inline-block;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 16px;
+
+}
+.sorted-button__text_less, .sorted-button__text_more {
+    color: #78C2F6;
+}
+.sorted-button__text_disable{
+    color: #BDBDBD;
+}
+.sorted-button__icon_less, .sorted-button__icon_more, .sorted-button__icon_disable{
+    display: inline-block;
+}
+.sorted-button__icon_more{
+    position: relative;
+    top: 9px;
+    right: 5px;
+    background: url("../images/arrow_more.svg") no-repeat;
+    width: 20px;
+    height: 20px;
+}
+.sorted-button__icon_less{
+    position: relative;
+    top: 9px;
+    right: 5px;
+    background: url("../images/arrow_less.svg") no-repeat;
+    width: 20px;
+    height: 20px;
+}
+.sorted-button__icon_disable{
+    position: relative;
+    top: 9px;
+    right: 5px;
+    background: url("../images/arrow_disable.svg") no-repeat;
+    width: 20px;
+    height: 20px;
+}
+.sorted-button_margin{
+    margin-bottom: 25px;
+}

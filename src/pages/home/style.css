@@ -1,0 +1,22 @@
+.task-text{
+    max-width: 400px;
+    width: 100%;
+    border:none;
+    outline:none;
+    margin-top: 17px;
+    margin-bottom: 12px;
+    position: relative;
+    height: 38px;
+    border-bottom: 1px solid #626262;
+
+}
+.task-text:focus{
+    border-color:  #50D5AD;
+}
+.task-text::placeholder {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px;
+    color: #939393;
+}

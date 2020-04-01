@@ -1,0 +1,37 @@
+.upload-button{
+    position: relative;
+    padding: 0;
+    left: 40px;
+    top:5px;
+    width:130px;
+    height: 30px;
+    border: none;
+    background: #74BBFD;
+    box-shadow: 0px 2px 4px rgba(116, 187, 253, 0.3);
+    border-radius: 15px;
+    cursor: pointer;
+}
+.upload-button__text, .upload-button__shape{
+    display: inline-block;
+}
+.upload-button__text{
+    color: #FFFFFF;
+    position: relative;
+    bottom: 2px;
+    left: 2px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+}
+.upload-button__shape{
+    position: relative;
+    width: 20px;
+    height: 15px;
+    top:3px;
+    right: 5px;
+    background: url("./upload.svg") no-repeat;
+}
+.upload-button:hover{
+    background: #49A7FF;
+}

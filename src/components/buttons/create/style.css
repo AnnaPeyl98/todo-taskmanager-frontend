@@ -1,0 +1,70 @@
+.task-text{
+    max-width: 400px;
+    width: 100%;
+    border:none;
+    outline:none;
+    margin-top: 17px;
+    margin-bottom: 12px;
+    position: relative;
+    height: 38px;
+    border-bottom: 1px solid #626262;
+
+}
+.task-text:focus{
+    border-color:  #50D5AD;
+}
+.task-text::placeholder {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px;
+    color: #939393;
+}
+.create-button{
+    position: relative;
+    padding: 0;
+    left: 15px;
+    top:5px;
+    width:110px;
+    height: 30px;
+    border: none;
+    background: #50D5AD;
+    box-shadow: 0 2px 4px rgba(69, 211, 168, 0.3);
+    border-radius: 15px;
+    cursor: pointer;
+}
+.create-button__text, .create-button__shape{
+    display: inline-block;
+}
+.create-button__text{
+    color: #FFFFFF;
+    position: relative;
+    bottom: 2px;
+    right: 2px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+    text-transform: uppercase;
+}
+.create-button__shape{
+    position: relative;
+    width: 15px;
+    height: 15px;
+    top:4px;
+    right: 5px;
+    background: url("./shape.svg") no-repeat;
+}
+.create-button:disabled{
+    cursor: not-allowed;
+    box-shadow: none;
+    background: #BDBDBD;
+}
+.create-button:hover{
+    background: #0ECB92;
+}
+.create-button:disabled:hover{
+    cursor: not-allowed;
+    box-shadow: none;
+    background: #BDBDBD;
+}
