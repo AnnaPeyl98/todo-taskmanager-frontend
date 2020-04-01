@@ -15,14 +15,14 @@
     position: relative;
 }
 .side-bar__title_todo{
-    background: url("./combined_shape.svg") no-repeat;
+    background: url("todo_gray.svg") no-repeat;
     width: 20px;
     height: 20px;
     padding: 0;
 
 }
 .side-bar__title_done{
-    background: url("./shape.svg") no-repeat;
+    background: url("done_gray.svg") no-repeat;
     width: 20px;
     height: 20px;
     padding: 0;
@@ -30,7 +30,7 @@
 .side-bar__title_todo, .side-bar__title_done, .side-bar__title_text{
     display: inline-block;
 }
-.side-bar__title_text{
+.side-bar__title_text, .side-bar__title_text{
     position: absolute;
     bottom: 2px;
     left: 27px;
@@ -40,6 +40,13 @@
     line-height: 21px;
     color: #979797;
 }
-.side-bar__title_text-active{
+
+.side-bar__title_active .side-bar__title_text{
     color: #78C2F5;
+}
+.side-bar__title_active .side-bar__title_todo{
+    background: url("todo_blue.svg") no-repeat;
+}
+.side-bar__title_active .side-bar__title_done{
+    background: url("done_blue.svg") no-repeat;
 }
