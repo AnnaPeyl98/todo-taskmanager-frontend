@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
 import Task from '../../components/task/Task';
 
 import list from './list';
@@ -10,7 +10,7 @@ import ButtonUpload from "../../components/buttons/upload/ButtonUpload";
 import ButtonSortedTodo from "../../components/sort/todo/ButtonSortedTodo";
 import FormField from "../../components/buttons/form/FormField";
 
-export default class ToDo extends React.Component {
+class ToDo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -69,3 +69,7 @@ export default class ToDo extends React.Component {
         );
     };
 };
+const mapStateToProps = (state) => ({});
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToDo);
