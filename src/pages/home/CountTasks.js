@@ -1,13 +1,16 @@
-import listTodo from '../../../public/mockapi/getInboxTaskList';
-import listDone from '../../../public/mockapi/getDoneTaskList';
+
 import './style.css';
-export function countToDo(){
-    return listTodo.taskList.filter(function(item){
-        return item.status==="inbox";
-    }).length;
-}
-export function countDone(){
-    return listDone.taskList.filter(function(item){
-        return item.status==="done";
-    }).length;
+import {bindActionCreators} from "redux";
+import getTaskList from "../../actions/tasksList/getTaskList";
+import {connect} from "react-redux";
+import React from 'react';
+export class CountTasks extends React.Component {
+
+    countToDo() {
+        return this.props.getTaskList("inbox").length;
+    }
+
+    countDone() {
+        return this.props.getTaskList("done").length;
+    }
 }

@@ -2,10 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 
-import getTaskList from "../../actions/tasksList/getTaskList";
 import Task from '../../components/task/Task';
 
-import list from '../../../public/mockapi/getInboxTaskList';
 
 import './style.css';
 import ButtonCreate from "../../components/buttons/create/ButtonCreate";
@@ -13,21 +11,36 @@ import ButtonUpload from "../../components/buttons/upload/ButtonUpload";
 import ButtonSortedTodo from "../../components/sort/todo/ButtonSortedTodo";
 import FormField from "../../components/buttons/form/FormField";
 
+import getTaskList from "../../actions/tasksList/getTaskList";
+import addNewTask from "../../actions/tasksList/addNewTask";
+import updateTaskById from "../../actions/tasksList/updateTaskById";
+import removeTaskById from "../../actions/tasksList/removeTaskById";
+
 class ToDo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: "0",
-            value: '',
-            status: 'inbox',
-            itemList: list.taskList
+            value: ''
         };
     };
 
     componentDidMount() {
         this.props.getTaskList("inbox");
     }
-
+    onClickChangeTaskStatus = (id) => {
+        this.props.updateTaskById(id, {
+            status: "done"
+        })
+            .then(
+                () => this.props.getTaskList("inbox")
+            );
+    };
+    onClickDeleteTask = (id) => {
+        this.props.removeTaskById(id)
+            .then(
+                () => this.props.getTaskList("inbox")
+            );
+    };
     onChange = (event) => {
         this.setState({
             value: event.target.value
@@ -35,24 +48,31 @@ class ToDo extends React.Component {
     };
     onSubmit = (event) => {
         event.preventDefault();
-        this.setState({
-            itemList: [
-                {
-                    id: this.state.id,
-                    status: this.state.status,
-                    text: this.state.value
-                },
-                ...this.state.itemList
-            ],
-            value: ''
 
-        });
-        console.log(this.state.id)
+        this.props.addNewTask({
+            text: this.state.value
+        }).then(
+            () => this.props.getTaskList("inbox")
+        );
+
+        this.setState({
+            value: ""
+        })
     };
     renderList = () => {
-        return this.props.taskList.map((item) => {
+        return this.props.tasks.map((item) => {
             return (
-                <Task key={item.id} id={item.id} title={item.text} status={item.status}/>
+                <Task key={item.id}
+                      id={item.id}
+                      title={item.text}
+                      status={item.status}
+                      onClickChangeTaskStatus={
+                          () => this.onClickChangeTaskStatus(item.id)
+                      }
+                      onClickDeleteTask={
+                          () => this.onClickDeleteTask(item.id)
+                      }
+                />
             );
         });
     };
@@ -79,12 +99,17 @@ class ToDo extends React.Component {
 };
 const mapStateToProps = (state) => {
     return {
-        taskList: state.taskListReducer.taskList
+        tasks: state.taskListReducer.tasks
     }
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    getTaskList: bindActionCreators(getTaskList, dispatch)
-});
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getTaskList: bindActionCreators(getTaskList, dispatch),
+        addNewTask: bindActionCreators(addNewTask, dispatch),
+        updateTaskById: bindActionCreators(updateTaskById, dispatch),
+        removeTaskById: bindActionCreators(removeTaskById, dispatch)
+    }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToDo);

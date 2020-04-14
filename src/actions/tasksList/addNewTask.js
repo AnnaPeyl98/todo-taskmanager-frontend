@@ -1,0 +1,19 @@
+import {post} from '../../fetcher/fetcher';
+
+import {ADD_TASK_ERROR, ADD_TASK_SUCCESS} from "./actionTypes";
+export default function addNewTask(taskData) {
+    return dispatch => {
+        return post(`http://localhost:8080/tasks/`, taskData)
+            .then((response) => {
+                dispatch({
+                    type: ADD_TASK_SUCCESS,
+                })
+            })
+            .catch((error) => {
+                dispatch({
+                    type: ADD_TASK_ERROR,
+                    error: error
+                })
+            })
+    }
+}

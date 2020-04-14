@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {NavLink} from "react-router-dom";
 import './style.css';
-import {countDone, countToDo} from "../../../../pages/home/CountTasks";
+
 
 export default class SideBar extends React.Component {
     render() {
@@ -16,7 +16,7 @@ export default class SideBar extends React.Component {
                         <div className='side-bar__title_todo'>
                         </div>
                         <span className=' side-bar__title_text'>
-                        To Do ({countToDo()})
+                        To Do ({})
                     </span>
                     </NavLink>
 
@@ -24,7 +24,7 @@ export default class SideBar extends React.Component {
                         <div className='side-bar__title_done'>
                         </div>
                         <span className='side-bar__title_text'>
-                        Done ({countDone()})
+                        Done ({})
                     </span>
                     </NavLink>
 
@@ -32,7 +32,6 @@ export default class SideBar extends React.Component {
         );
     };
 };
-
 SideBar.propTypes = {
     className: PropTypes.string
 };

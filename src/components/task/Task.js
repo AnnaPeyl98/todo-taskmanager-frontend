@@ -8,7 +8,7 @@ import ToolButton from "../tool/ToolButton";
 
 
 export default class Task extends React.Component {
-    onClickMakeDone = () => {
+/*    onClickMakeDone = () => {
         alert("done "+this.props.id);
     };
     onClickUpdate = () => {
@@ -16,26 +16,26 @@ export default class Task extends React.Component {
     };
     onClickDelete = () => {
         alert("delete "+this.props.id);
-    };
+    };*/
     render() {
         return (
             <article className="task">
                 <MarkerButton
                     id={this.props.id}
                     className={this.props.status === "inbox" ? "checkbox" : "done-mark"}
-                    onClick={this.onClickMakeDone}
+                    onClick={this.props.onClickChangeTaskStatus}
                 />
 
                 <h3 className={"task__title"}>{this.props.title}</h3>
 
                 <div className={"task__tools"}>
                     {this.props.status === "inbox" &&
-                    <ToolButton id={this.props.id} className={"edit"} onClick={this.onClickUpdate}/>}
+                    <ToolButton id={this.props.id} className={"edit"} onClick={()=>{}}/>}
 
                     <ToolButton
                         id={this.props.id}
                         className={"delete"}
-                        onClick={this.onClickDelete}
+                        onClick={this.props.onClickDeleteTask}
                     />
                 </div>
             </article>
@@ -46,11 +46,14 @@ export default class Task extends React.Component {
 Task.propTypes = {
     id: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    onClickChangeTaskStatus: PropTypes.func,
+    onClickDeleteTask: PropTypes.func
 };
 
 Task.defaultProps = {
     id: '',
     status: 'inbox',
-    title: ''
+    title: '',
+    onClickDeleteTask:()=>{}
 };
