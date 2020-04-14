@@ -1,8 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from "redux";
+
+import getTaskList from "../../actions/tasksList/getTaskList";
 import Task from '../../components/task/Task';
 
-import list from './list';
+import list from '../../../public/mockapi/getInboxTaskList';
 
 import './style.css';
 import ButtonCreate from "../../components/buttons/create/ButtonCreate";
@@ -14,12 +17,16 @@ class ToDo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id:"0",
+            id: "0",
             value: '',
             status: 'inbox',
-            itemList: list.data
+            itemList: list.taskList
         };
     };
+
+    componentDidMount() {
+        this.props.getTaskList("inbox");
+    }
 
     onChange = (event) => {
         this.setState({
@@ -30,19 +37,20 @@ class ToDo extends React.Component {
         event.preventDefault();
         this.setState({
             itemList: [
-                {   id: this.state.id,
+                {
+                    id: this.state.id,
                     status: this.state.status,
                     text: this.state.value
                 },
                 ...this.state.itemList
             ],
-            value:''
+            value: ''
 
         });
         console.log(this.state.id)
     };
     renderList = () => {
-        return this.state.itemList.map((item) => {
+        return this.props.taskList.map((item) => {
             return (
                 <Task key={item.id} id={item.id} title={item.text} status={item.status}/>
             );
@@ -56,11 +64,11 @@ class ToDo extends React.Component {
                     className="form-create"
                     onSubmit={this.onSubmit}
                 >
-                <FormField
-                    value={this.state.value}
-                    onChange={this.onChange}/>
-                <ButtonCreate
-                disabled = {this.state.value.length===0}/>
+                    <FormField
+                        value={this.state.value}
+                        onChange={this.onChange}/>
+                    <ButtonCreate
+                        disabled={this.state.value.length === 0}/>
                 </form>
                 <ButtonUpload/>
                 <ButtonSortedTodo/>
@@ -69,7 +77,14 @@ class ToDo extends React.Component {
         );
     };
 };
-const mapStateToProps = (state) => ({});
-const mapDispatchToProps = (dispatch) => ({});
+const mapStateToProps = (state) => {
+    return {
+        taskList: state.taskListReducer.taskList
+    }
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    getTaskList: bindActionCreators(getTaskList, dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToDo);

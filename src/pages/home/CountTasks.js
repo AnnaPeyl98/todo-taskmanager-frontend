@@ -1,12 +1,13 @@
-import list from '../todo/list';
+import listTodo from '../../../public/mockapi/getInboxTaskList';
+import listDone from '../../../public/mockapi/getDoneTaskList';
 import './style.css';
 export function countToDo(){
-    return list.data.filter(function(item){
+    return listTodo.taskList.filter(function(item){
         return item.status==="inbox";
     }).length;
 }
 export function countDone(){
-    return list.data.filter(function(item){
+    return listDone.taskList.filter(function(item){
         return item.status==="done";
     }).length;
 }
