@@ -1,3 +1,4 @@
+localStorage.setItem('jwt','eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhbm5hcGV5bEBnbWFpbC5jb20iLCJpYXQiOjE1ODcxMjQ0NTUsInN1YiI6ImFkbWluIiwiZXhwIjoxNTg3MTI2MjU1LCJhdXRob3JpdGllcyI6WyJBRE1JTiIsIlVTRVIiXX0.BIKxSeFSQTGBMQ598lClWI-AJiyufOarE0xaB58DcBA')
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
         return response;
@@ -5,18 +6,21 @@ function checkStatus(response) {
     throw new Error(response.statusText);
 }
 function buildRequest(requestMethod, body) {
+    const jwt = localStorage.getItem('jwt')
     return {
         method: requestMethod,
         headers: new Headers({
             "Accept": "application/json",
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${jwt}`
         }),
         body: body
     };
 }
 export function get(url) {
     return fetch(url,  buildRequest('GET',  null))
-        .then(response => {
+        .then(response =>
+        {
             return checkStatus(response)
         })
         .then(response => {
