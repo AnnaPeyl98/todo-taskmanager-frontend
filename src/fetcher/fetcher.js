@@ -1,4 +1,3 @@
-localStorage.setItem('jwt','eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhbm5hcGV5bEBnbWFpbC5jb20iLCJpYXQiOjE1ODcxMjQ0NTUsInN1YiI6ImFkbWluIiwiZXhwIjoxNTg3MTI2MjU1LCJhdXRob3JpdGllcyI6WyJBRE1JTiIsIlVTRVIiXX0.BIKxSeFSQTGBMQ598lClWI-AJiyufOarE0xaB58DcBA')
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
         return response;
@@ -6,13 +5,13 @@ function checkStatus(response) {
     throw new Error(response.statusText);
 }
 function buildRequest(requestMethod, body) {
-    const jwt = localStorage.getItem('jwt')
+    const token = localStorage.getItem("jwt-token");
     return {
         method: requestMethod,
         headers: new Headers({
             "Accept": "application/json",
             "Content-Type": "application/json",
-            'Authorization': `Bearer ${jwt}`
+            "Authorization": `Bearer ${token}`
         }),
         body: body
     };
@@ -20,6 +19,7 @@ function buildRequest(requestMethod, body) {
 export function get(url) {
     return fetch(url,  buildRequest('GET',  null))
         .then(response =>
+
         {
             return checkStatus(response)
         })
@@ -57,4 +57,20 @@ export function patch(url, updatedTask) {
         .catch(error => {
             return error
         });
+}
+export function postUserData(url, userData) {
+    return fetch(url, {
+        method: 'POST',
+        headers: new Headers({
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }),
+        body: JSON.stringify(userData)
+    }).then(response => {
+        return checkStatus(response);
+    }).then(response => {
+        return response.json();
+    }).catch(error => {
+        return error;
+    })
 }
