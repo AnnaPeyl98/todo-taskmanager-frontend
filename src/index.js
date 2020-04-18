@@ -9,6 +9,7 @@ import store from './store/store'
 import './index.css';
 import PlainLayout from "./layouts/plain/PlainLayout";
 import Login from './pages/login/Login';
+import SignUp from "./pages/signup/SignUp";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -18,6 +19,13 @@ ReactDOM.render(
                     return (
                         <PlainLayout>
                             <Route exact path={'/signin'} component={Login}/>
+                        </PlainLayout>
+                    )
+                }}/>
+                <Route path={'/signup'} render={() => {
+                    return (
+                        <PlainLayout>
+                            <Route exact path={'/signup'} component={SignUp}/>
                         </PlainLayout>
                     )
                 }}/>

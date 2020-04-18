@@ -9,6 +9,7 @@ import signIn from "../../actions/user/signIn";
 import siteLogo from './images/logo.svg';
 import Button from "../../components/baseButton/Button";
 import FormInput from "../../components/formInput/FormInput";
+import OtherAuthenticate from "../../layouts/plain/components/otherAuthenticate/OtherAuthenticate";
 
 class Login extends React.Component {
     constructor(props) {
@@ -56,24 +57,11 @@ class Login extends React.Component {
             && this.state.password.length !== 0;
     };
 
-    onLoginSubmit = (event) => {
-        event.preventDefault();
-
-        const username = this.state.username;
-        const password = this.state.password;
-        this.setState({
-            username: "",
-            password: ""
-        });
-
-        this.props.login(username, password).then(
-            this.checkAuthorized()
-        );
-    };
 
     usernameStyleClass = () => {
         const error = this.props.error;
         const username = this.state.username;
+        console.log(error === null || username.length > 0)
         return error === null || username.length > 0
             ? ""
             : "invalid-username-field";
@@ -88,7 +76,10 @@ class Login extends React.Component {
     };
     handleSubmit = (event) => {
         event.preventDefault();
-console.log(event.target)
+        this.setState({
+            username: "",
+            password: ""
+        });
         const username = event.target['E-mail'].value;
         const password = event.target['Password'].value;
 
@@ -125,6 +116,12 @@ console.log(event.target)
                         disabled={!this.formFilled()}
                         value={"Log in"}
                     />
+                <OtherAuthenticate
+                    className={"login-form"}
+                    title={"Don't have an account?"}
+                    buttonTitle={"Sign up"}
+                    url={'/signup'}
+                />
 
             </form>
         );

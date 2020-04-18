@@ -4,73 +4,83 @@ function checkStatus(response) {
     }
     throw new Error(response.statusText);
 }
-function buildRequest(requestMethod, body) {
-    const token = localStorage.getItem("jwt-token");
+
+export function buildRequest(requestMethod, body, token) {
+    const headers = new Headers({
+        "Accept":       "application/json",
+        "Content-Type": "application/json"
+
+    });
+    if (token !== null) {
+        headers.set("Authorization", `Bearer ${token}`);
+    }
+
     return {
         method: requestMethod,
-        headers: new Headers({
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        }),
+        headers: headers,
         body: body
     };
 }
-export function get(url) {
-    return fetch(url,  buildRequest('GET',  null))
-        .then(response =>
 
-        {
+export function get(url, token) {
+    return fetch(url, buildRequest('GET', null, token))
+        .then(response => {
             return checkStatus(response)
         })
         .then(response => {
             return response.json()
         })
         .catch(error => {
-            return error;
-        });
-}
-export function post(url, taskData) {
-    return fetch(url, buildRequest('POST', JSON.stringify(taskData)))
-        .then(response => {
-            return checkStatus(response)
-        })
-        .catch(error => {
-            return error;
-        });
-}
-export function remove(url) {
-    return fetch(url, buildRequest('DELETE', null))
-        .then(response => {
-            return checkStatus(response)
-        })
-        .catch(error => {
-            return error
+            throw error;
         });
 }
 
-export function patch(url, updatedTask) {
-    return fetch(url, buildRequest('PATCH', JSON.stringify(updatedTask)))
+
+export function post(url, body, token) {
+    return fetch(url, buildRequest('POST', body, token))
+        .then(response => {
+            console.log(response)
+            return checkStatus(response)
+        })
+        .then(response => {
+            return response.json()
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+
+export function remove(url, token) {
+    return fetch(url, buildRequest('DELETE', null, token))
         .then(response => {
             return checkStatus(response)
         })
         .catch(error => {
-            return error
+            throw error
         });
 }
-export function postUserData(url, userData) {
-    return fetch(url, {
-        method: 'POST',
-        headers: new Headers({
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }),
-        body: JSON.stringify(userData)
-    }).then(response => {
-        return checkStatus(response);
-    }).then(response => {
-        return response.json();
-    }).catch(error => {
-        return error;
-    })
+
+
+export function patch(url, body, token) {
+    return fetch(url, buildRequest('PATCH', body, token))
+        .then(response => {
+            return checkStatus(response)
+        })
+        .catch(error => {
+            throw error
+        });
+}
+export function postUser(url, body, token) {
+    return fetch(url, buildRequest('POST', body, token))
+        .then(response => {
+            console.log(response)
+            return checkStatus(response)
+        })
+        .then(response => {
+            return response
+        })
+        .catch(error => {
+            throw error;
+        });
 }

@@ -1,14 +1,16 @@
 import {get} from "../../fetcher/fetcher";
 
-import {AUTHENTICATE_FAIL, WHOAMI_SUCCESS} from "./actionTypes";
+import {AUTHENTICATE_FAIL, AUTHENTICATE_SUCCESS} from "./actionTypes";
 
 export default function whoami() {
     return (dispatch) => {
-        return get('http://localhost:8080/whoami')
+        const token = localStorage.getItem('jwt-token');
+        return get('http://localhost:8080/whoami', token)
             .then((response) => {
-                console.log(response);
                 dispatch({
-                    type: WHOAMI_SUCCESS
+                    type: AUTHENTICATE_SUCCESS,
+                    username: response.username,
+                    error: null
                 });
             })
             .catch((error) => {
