@@ -14,3 +14,13 @@
     margin:18px 0 18px 80px;
     text-decoration: none;
 }
+.header__user {
+    cursor: pointer;
+    float: right;
+}
+
+.user {
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+}

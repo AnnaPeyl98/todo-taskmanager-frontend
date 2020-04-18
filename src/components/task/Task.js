@@ -8,15 +8,6 @@ import ToolButton from "../tool/ToolButton";
 
 
 export default class Task extends React.Component {
-/*    onClickMakeDone = () => {
-        alert("done "+this.props.id);
-    };
-    onClickUpdate = () => {
-        alert("update "+this.props.id);
-    };
-    onClickDelete = () => {
-        alert("delete "+this.props.id);
-    };*/
     render() {
         return (
             <article className="task">

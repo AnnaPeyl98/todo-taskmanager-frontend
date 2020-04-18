@@ -15,6 +15,7 @@ import getTaskList from "../../actions/tasksList/getTaskList";
 import addNewTask from "../../actions/tasksList/addNewTask";
 import updateTaskById from "../../actions/tasksList/updateTaskById";
 import removeTaskById from "../../actions/tasksList/removeTaskById";
+import whoami from "../../actions/user/whoami";
 
 class ToDo extends React.Component {
     constructor(props) {
@@ -25,6 +26,10 @@ class ToDo extends React.Component {
     };
 
     componentDidMount() {
+        if (!this.props.isAuthorized) {
+            this.props.history.replace("/signin");
+        }
+        this.props.whoami();
         this.props.getTaskList("inbox");
     }
     onClickChangeTaskStatus = (id) => {
@@ -99,7 +104,8 @@ class ToDo extends React.Component {
 };
 const mapStateToProps = (state) => {
     return {
-        tasks: state.taskListReducer.tasks
+        tasks: state.taskListReducer.tasks,
+        isAuthorized: state.userReducer.isAuthorized
     }
 };
 
@@ -108,7 +114,8 @@ const mapDispatchToProps = (dispatch) => {
         getTaskList: bindActionCreators(getTaskList, dispatch),
         addNewTask: bindActionCreators(addNewTask, dispatch),
         updateTaskById: bindActionCreators(updateTaskById, dispatch),
-        removeTaskById: bindActionCreators(removeTaskById, dispatch)
+        removeTaskById: bindActionCreators(removeTaskById, dispatch),
+        whoami: bindActionCreators(whoami, dispatch)
     }
 };
 
